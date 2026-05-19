@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>03 - Guia CRUD</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+        header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+        main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+        h1, h2 { color: #1f2937; }
+        pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; }
+        th { background: #e5e7eb; }
+        a { color: #2563eb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>03 - Guia CRUD</h1>
+</header>
+
+<main>
+    <p><a href="index.html">Voltar ao início</a></p>
+
+    <h2>O que é CRUD?</h2>
+
+    <p>
+        CRUD é um conjunto básico de operações usado em sistemas:
+    </p>
+
+    <table>
+        <tr>
+            <th>Letra</th>
+            <th>Significado</th>
+            <th>Exemplo</th>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>Create</td>
+            <td>Cadastrar</td>
+        </tr>
+        <tr>
+            <td>R</td>
+            <td>Read</td>
+            <td>Listar ou buscar</td>
+        </tr>
+        <tr>
+            <td>U</td>
+            <td>Update</td>
+            <td>Atualizar</td>
+        </tr>
+        <tr>
+            <td>D</td>
+            <td>Delete</td>
+            <td>Remover</td>
+        </tr>
+    </table>
+
+    <h2>Rotas comuns</h2>
+
+    <table>
+        <tr>
+            <th>Método HTTP</th>
+            <th>Rota</th>
+            <th>Função</th>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/produtos</td>
+            <td>Lista todos os registros</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/produtos/{idLocal}</td>
+            <td>Busca um registro por idLocal</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/produtos</td>
+            <td>Cadastra um novo registro</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/produtos/{idLocal}</td>
+            <td>Atualiza um registro existente</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/produtos/{idLocal}</td>
+            <td>Remove um registro</td>
+        </tr>
+    </table>
+
+    <h2>Exemplo de controller CRUD</h2>
+
+    <pre><code>@RestController
+@RequestMapping("/produtos")
+public class ProdutoController {
+
+    @Autowired
+    private ProdutoService service;
+
+    @GetMapping
+    public List&lt;Produto&gt; listar() {
+        return service.listarTodos();
+    }
+
+    @GetMapping("/{idLocal}")
+    public Produto buscarPorId(@PathVariable Long idLocal) {
+        return service.buscarPorId(idLocal);
+    }
+
+    @PostMapping
+    public Produto cadastrar(@RequestBody Produto produto) {
+        return service.salvar(produto);
+    }
+
+    @PutMapping("/{idLocal}")
+    public Produto atualizar(@PathVariable Long idLocal, @RequestBody Produto produto) {
+        return service.atualizar(idLocal, produto);
+    }
+
+    @DeleteMapping("/{idLocal}")
+    public void deletar(@PathVariable Long idLocal) {
+        service.deletar(idLocal);
+    }
+}</code></pre>
+
+    <h2>Exemplo de JSON para POST</h2>
+
+    <pre><code>{
+  "nome": "Mouse",
+  "preco": 89.90
+}</code></pre>
+
+    <h2>Códigos HTTP comuns</h2>
+
+    <table>
+        <tr>
+            <th>Código</th>
+            <th>Significado</th>
+        </tr>
+        <tr>
+            <td>200</td>
+            <td>Requisição bem-sucedida</td>
+        </tr>
+        <tr>
+            <td>201</td>
+            <td>Registro criado</td>
+        </tr>
+        <tr>
+            <td>204</td>
+            <td>Removido sem retornar conteúdo</td>
+        </tr>
+        <tr>
+            <td>400</td>
+            <td>Erro nos dados enviados</td>
+        </tr>
+        <tr>
+            <td>404</td>
+            <td>Recurso não encontrado</td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>Erro interno do servidor</td>
+        </tr>
+    </table>
+
+</main>
+
+</body>
+</html>

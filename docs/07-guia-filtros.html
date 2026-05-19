@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>07 - Filtros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+        header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+        main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+        h1, h2 { color: #1f2937; }
+        pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; overflow-x: auto; }
+        a { color: #2563eb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>07 - Filtros</h1>
+</header>
+
+<main>
+    <p><a href="index.html">Voltar ao início</a></p>
+
+    <h2>O que são filtros?</h2>
+
+    <p>
+        Filtros permitem buscar registros de acordo com alguma informação.
+        Por exemplo: buscar produtos pelo nome, buscar clientes por cidade ou buscar eventos por categoria.
+    </p>
+
+    <h2>Exemplo de filtro por nome</h2>
+
+    <p>
+        No repository, podemos criar métodos usando o padrão do Spring Data JPA.
+    </p>
+
+    <pre><code>public interface ProdutoRepository extends JpaRepository&lt;Produto, Long&gt; {
+
+    List&lt;Produto&gt; findByNomeContainingIgnoreCase(String nome);
+
+}</code></pre>
+
+    <h2>Service usando filtro</h2>
+
+    <pre><code>@Service
+public class ProdutoService {
+
+    @Autowired
+    private ProdutoRepository repository;
+
+    public List&lt;Produto&gt; filtrarPorNome(String nome) {
+        return repository.findByNomeContainingIgnoreCase(nome);
+    }
+}</code></pre>
+
+    <h2>Controller usando @RequestParam</h2>
+
+    <pre><code>@GetMapping("/filtro")
+public List&lt;Produto&gt; filtrarPorNome(@RequestParam String nome) {
+    return service.filtrarPorNome(nome);
+}</code></pre>
+
+    <h2>Exemplo de chamada</h2>
+
+    <pre><code>GET /produtos/filtro?nome=mouse</code></pre>
+
+    <h2>Consulta por entidade relacionada</h2>
+
+    <p>
+        Também é possível buscar registros relacionados a outro registro.
+    </p>
+
+    <pre><code>List&lt;Produto&gt; findByCategoriaId(Long categoriaId);</code></pre>
+
+    <p>Exemplo de rota:</p>
+
+    <pre><code>GET /produtos/categoria/1</code></pre>
+
+    <h2>Controller com PathVariable</h2>
+
+    <pre><code>@GetMapping("/categoria/{idCategoria}")
+public List&lt;Produto&gt; listarPorCategoria(@PathVariable Long idCategoria) {
+    return service.listarPorCategoria(idCategoria);
+}</code></pre>
+
+</main>
+
+</body>
+</html>

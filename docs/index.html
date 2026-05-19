@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Materiais de Consulta - API Spring</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #f4f6f8;
+          margin: 0;
+          color: #222;
+        }
+
+        header {
+          background: #1f2937;
+          color: white;
+          padding: 30px;
+          text-align: center;
+        }
+
+        main {
+          max-width: 1000px;
+          margin: 30px auto;
+          background: white;
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 0 12px rgba(0,0,0,0.08);
+        }
+
+        h1, h2 {
+          color: #1f2937;
+        }
+
+        .aviso {
+          background: #fff7ed;
+          border-left: 6px solid #f97316;
+          padding: 15px;
+          margin: 20px 0;
+          border-radius: 6px;
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 16px;
+          margin-top: 25px;
+        }
+
+        .card {
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          padding: 18px;
+          background: #fafafa;
+          transition: 0.2s;
+        }
+
+        .card:hover {
+          background: #eef2ff;
+          transform: translateY(-2px);
+        }
+
+        a {
+          text-decoration: none;
+          color: #2563eb;
+          font-weight: bold;
+        }
+
+        footer {
+          text-align: center;
+          color: #666;
+          margin: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Materiais de Consulta</h1>
+    <p>Avaliação Prática - API Spring</p>
+</header>
+
+<main>
+    <h2>Orientação</h2>
+
+    <p>
+        Estes materiais foram preparados para consulta durante a avaliação prática.
+        Eles explicam conceitos, estruturas e exemplos gerais de Spring Boot, API REST,
+        JPA, validações, Swagger e Git.
+    </p>
+
+    <div class="aviso">
+        <strong>Atenção:</strong> durante a avaliação, consulte apenas estes arquivos.
+        Não é permitido pesquisar em sites, usar IA, fóruns, vídeos ou projetos externos.
+    </div>
+
+    <h2>Manuais</h2>
+
+    <div class="grid">
+        <div class="card">
+            <a href="01-como-rodar-o-projeto.html">01 - Como rodar o projeto</a>
+            <p>Passos básicos para abrir, configurar e executar o projeto.</p>
+        </div>
+
+        <div class="card">
+            <a href="02-estrutura-spring.html">02 - Estrutura Spring Boot</a>
+            <p>Explicação das camadas Model, Repository, Service, Controller e DTO.</p>
+        </div>
+
+        <div class="card">
+            <a href="03-guia-crud.html">03 - Guia CRUD</a>
+            <p>Exemplos gerais de rotas para cadastrar, listar, buscar, atualizar e remover.</p>
+        </div>
+
+        <div class="card">
+            <a href="04-guia-jpa-relacionamentos.html">04 - JPA e Relacionamentos</a>
+            <p>Resumo sobre entidades, chaves primárias e relacionamentos.</p>
+        </div>
+
+        <div class="card">
+            <a href="05-guia-validacoes.html">05 - Validações</a>
+            <p>Anotações para validar dados recebidos pela API.</p>
+        </div>
+
+        <div class="card">
+            <a href="06-guia-swagger.html">06 - Swagger/OpenAPI</a>
+            <p>Como documentar entidades e rotas da API.</p>
+        </div>
+
+        <div class="card">
+            <a href="07-guia-filtros.html">07 - Filtros</a>
+            <p>Exemplos simples de consultas personalizadas.</p>
+        </div>
+
+        <div class="card">
+            <a href="08-erros-comuns.html">08 - Erros comuns</a>
+            <p>Problemas frequentes em projetos Spring Boot e como interpretar.</p>
+        </div>
+
+        <div class="card">
+            <a href="09-comandos-git.html">09 - Comandos Git</a>
+            <p>Comandos básicos para enviar o projeto ao GitHub.</p>
+        </div>
+
+        <div class="card">
+            <a href="10-checklist-entrega.html">10 - Checklist de entrega</a>
+            <p>Lista final para conferir antes de entregar a avaliação.</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    Material de consulta offline - Prof. Lorenzo - Avaliação prática
+</footer>
+
+</body>
+</html>

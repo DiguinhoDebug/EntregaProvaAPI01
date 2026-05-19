@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>01 - Como rodar o projeto</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+        header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+        main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+        h1, h2 { color: #1f2937; }
+        code, pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; display: block; overflow-x: auto; }
+        .info { background: #eff6ff; border-left: 6px solid #2563eb; padding: 15px; margin: 20px 0; border-radius: 6px; }
+        a { color: #2563eb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>01 - Como rodar o projeto</h1>
+</header>
+
+<main>
+    <p><a href="index.html">Voltar ao início</a></p>
+
+    <h2>1. Abrir o projeto</h2>
+    <p>
+        Abra o projeto na IDE utilizada em aula.
+        Aguarde a IDE carregar as dependências do Maven.
+    </p>
+
+    <h2>2. Verificar o arquivo pom.xml</h2>
+    <p>
+        O arquivo <strong>pom.xml</strong> contém as dependências do projeto, como Spring Web,
+        Spring Data JPA, PostgreSQL, Validation e Swagger/OpenAPI.
+    </p>
+
+    <h2>3. Criar o banco de dados no PostgreSQL</h2>
+    <p>
+        Antes de rodar a aplicação, crie um banco de dados no PostgreSQL. Pode ser usado o pgAdmin ou o comando:
+    </p>
+
+    <pre><code>CREATE DATABASE ___________;</code></pre>
+
+    <h2>4. Configurar o application.properties</h2>
+    <p>
+        No arquivo de propriedades da aplicação, verifique a conexão com o banco.
+    </p>
+
+    <pre><code>
+spring.datasource.url=jdbc:postgresql://localhost:5432/nomeDoBanco
+spring.datasource.username=
+spring.datasource.password=
+
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true</code></pre>
+
+    <h2>5. Rodar a aplicação</h2>
+    <p>
+        Execute a classe principal do projeto
+    </p>
+
+    <h2>6. Testar no navegador</h2>
+    <p>
+        Depois que o projeto iniciar, teste o Swagger:
+    </p>
+
+    <pre><code>http://localhost:8080/swagger-ui.html</code></pre>
+
+    <p>ou:</p>
+
+    <pre><code>http://localhost:8080/swagger-ui/index.html</code></pre>
+
+    <h2>7. Testar no Postman</h2>
+    <p>
+        Você também pode testar as rotas usando o Postman.
+        Lembre-se de enviar dados em JSON e usar o cabeçalho:
+    </p>
+
+    <pre><code>Content-Type: application/json</code></pre>
+
+</main>
+
+</body>
+</html>

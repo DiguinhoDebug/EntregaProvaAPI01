@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>05 - Validações</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+        header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+        main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+        h1, h2 { color: #1f2937; }
+        pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; }
+        th { background: #e5e7eb; }
+        a { color: #2563eb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>05 - Validações</h1>
+</header>
+
+<main>
+    <p><a href="index.html">Voltar ao início</a></p>
+
+    <h2>Para que servem validações?</h2>
+
+    <p>
+        Validações impedem que dados incorretos sejam cadastrados no sistema.
+        Elas ajudam a proteger a API contra informações incompletas ou inválidas.
+    </p>
+
+    <h2>Anotações comuns</h2>
+
+    <table>
+        <tr>
+            <th>Anotação</th>
+            <th>Uso</th>
+        </tr>
+        <tr>
+            <td>@NotBlank</td>
+            <td>Valida textos que não podem estar vazios</td>
+        </tr>
+        <tr>
+            <td>@NotNull</td>
+            <td>Valida campos que não podem ser nulos</td>
+        </tr>
+        <tr>
+            <td>@Positive</td>
+            <td>Valida números positivos</td>
+        </tr>
+        <tr>
+            <td>@Email</td>
+            <td>Valida formato de e-mail</td>
+        </tr>
+        <tr>
+            <td>@Size</td>
+            <td>Valida tamanho mínimo ou máximo</td>
+        </tr>
+    </table>
+
+    <h2>Exemplo</h2>
+
+    <pre><code>
+    @NotBlank(message = "O nome é obrigatório")
+    private String nome,
+
+    @NotNull(message = "O preço é obrigatório")
+    @Positive(message = "O preço deve ser positivo")
+    private Double preco
+    </code></pre>
+
+    <h2>Usando @Valid no controller</h2>
+
+    <p>
+        Para que as validações funcionem, use <strong>@Valid</strong>.
+    </p>
+
+    <pre><code>
+public Produto cadastrar(@Valid @RequestBody ProdutoRequestDTO dto)
+    </code></pre>
+
+    <h2>Dependência necessária</h2>
+
+    <p>
+        O projeto precisa ter a dependência de validação no pom.xml.
+    </p>
+
+    <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+
+    <h2>Tratando erros de validação</h2>
+
+    <p>
+        Um handler pode capturar erros de validação e devolver mensagens mais organizadas.
+    </p>
+
+    <pre><code>@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; tratarValidacao(MethodArgumentNotValidException ex) {
+        Map&lt;String, String&gt; erros = new HashMap&lt;&gt;();
+
+        ex.getBindingResult().getFieldErrors().forEach(erro -> {
+            erros.put(erro.getField(), erro.getDefaultMessage());
+        });
+
+        return ResponseEntity.badRequest().body(erros);
+    }
+}</code></pre>
+
+</main>
+
+</body>
+</html>

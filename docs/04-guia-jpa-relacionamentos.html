@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>04 - JPA e Relacionamentos</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+    header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+    main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+    h1, h2 { color: #1f2937; }
+    pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .alerta { background: #fef2f2; border-left: 6px solid #dc2626; padding: 15px; border-radius: 6px; margin: 20px 0; }
+    a { color: #2563eb; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>04 - JPA e Relacionamentos</h1>
+</header>
+
+<main>
+  <p><a href="index.html">Voltar ao início</a></p>
+
+  <h2>JPA</h2>
+
+  <p>
+    JPA ajuda a mapear classes Java para tabelas de banco de dados.
+    Com isso, uma classe pode representar uma tabela.
+  </p>
+
+  <h2>Anotações básicas</h2>
+
+  <pre><code>@Entity
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idLocal;
+
+    private String nome;
+}</code></pre>
+
+  <h2>@Entity</h2>
+  <p>Indica que a classe será tratada como entidade no banco de dados.</p>
+
+  <h2>@Id</h2>
+  <p>Indica qual atributo é a chave primária.</p>
+
+  <h2>@GeneratedValue</h2>
+  <p>Indica que o valor do idLocal será gerado automaticamente.</p>
+
+  <h2>Relacionamento ManyToOne</h2>
+
+  <p>
+    Usado quando muitos registros pertencem a um registro principal.
+  </p>
+
+  <p>Exemplo: muitos produtos pertencem a uma categoria.</p>
+
+  <pre><code>@ManyToOne
+@JoinColumn(name = "categoria_id")
+private Categoria categoria;</code></pre>
+
+  <h2>Relacionamento OneToMany</h2>
+
+  <p>
+    Usado quando um registro principal possui vários registros relacionados.
+  </p>
+
+  <pre><code>@OneToMany(mappedBy = "categoria")
+private List&lt;Produto&gt; produtos;</code></pre>
+
+
+  <h2>Exemplo completo</h2>
+
+  <pre><code>@Entity
+public class Categoria {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idLocal;
+
+    private String nome;
+}</code></pre>
+
+  <pre><code>@Entity
+public class Produto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idLocal;
+
+    private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+}</code></pre>
+
+  <h2>Buscando entidade relacionada</h2>
+
+  <p>
+    Quando um cadastro depende de outra entidade, normalmente buscamos primeiro a entidade relacionada pelo idLocal.
+  </p>
+
+  <pre><code>Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+        .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+
+Produto produto = new Produto();
+produto.setNome(dto.getNome());
+produto.setCategoria(categoria);
+
+return produtoRepository.save(produto);</code></pre>
+
+</main>
+
+</body>
+</html>

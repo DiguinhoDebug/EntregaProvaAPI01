@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>08 - Erros comuns</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+        header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+        main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+        h1, h2 { color: #1f2937; }
+        pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; overflow-x: auto; }
+        .erro { background: #fef2f2; border-left: 6px solid #dc2626; padding: 15px; margin: 20px 0; border-radius: 6px; }
+        .solucao { background: #ecfdf5; border-left: 6px solid #16a34a; padding: 15px; margin: 20px 0; border-radius: 6px; }
+        a { color: #2563eb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>08 - Erros comuns</h1>
+</header>
+
+<main>
+    <p><a href="index.html">Voltar ao início</a></p>
+
+    <h2>Erro de banco de dados</h2>
+
+    <div class="erro">
+        Failed to configure a DataSource: 'url' attribute is not specified
+    </div>
+
+    <div class="solucao">
+        Verifique se o arquivo application.properties possui a URL do banco, usuário, senha e driver.
+    </div>
+
+    <pre><code>spring.datasource.url=jdbc:postgresql://localhost:5432/nome_do_banco
+spring.datasource.username=postgres
+spring.datasource.password=sua_senha
+spring.datasource.driver-class-name=org.postgresql.Driver</code></pre>
+
+    <h2>Erro 400 Bad Request</h2>
+
+    <div class="erro">
+        A requisição foi enviada com dados inválidos.
+    </div>
+
+    <div class="solucao">
+        Verifique se o JSON está correto e se o cabeçalho Content-Type está como application/json.
+    </div>
+
+    <pre><code>{
+  "nome": "Exemplo",
+  "preco": 100.0
+}</code></pre>
+
+    <h2>Erro 404 Not Found</h2>
+
+    <div class="erro">
+        O recurso solicitado não foi encontrado.
+    </div>
+
+    <div class="solucao">
+        Verifique se o idLocal existe no banco de dados e se a rota está correta.
+    </div>
+
+    <h2>Erro de relacionamento nulo</h2>
+
+    <div class="erro">
+        DataIntegrityViolationException ou erro de chave estrangeira.
+    </div>
+
+    <div class="solucao">
+        Verifique se a entidade relacionada foi buscada no banco antes de salvar.
+    </div>
+
+    <pre><code>Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+        .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));</code></pre>
+
+    <h2>Erro no Swagger</h2>
+
+    <div class="erro">
+        Swagger não abre ou retorna erro.
+    </div>
+
+    <div class="solucao">
+        Verifique se a dependência springdoc-openapi está no pom.xml e se o projeto iniciou corretamente.
+    </div>
+
+    <h2>Erro de importação</h2>
+
+    <div class="erro">
+        Cannot resolve symbol
+    </div>
+
+    <div class="solucao">
+        Verifique se a classe existe, se o pacote está correto e se a dependência foi carregada pelo Maven.
+    </div>
+
+    <h2>Erro de anotação esquecida</h2>
+
+    <p>
+        Algumas classes precisam de anotações para funcionar corretamente.
+    </p>
+
+    <pre><code>@Entity
+@Service
+@RestController
+@RequestMapping
+@Id
+@GeneratedValue</code></pre>
+
+    <h2>Erro ao atualizar</h2>
+
+    <div class="erro">
+        O sistema cria um novo registro em vez de atualizar.
+    </div>
+
+    <div class="solucao">
+        No método de atualização, busque o registro existente, altere os campos e depois salve.
+    </div>
+
+    <pre><code>Produto produto = buscarPorId(idLocal);
+produto.setNome(dto.getNome());
+produto.setPreco(dto.getPreco());
+return repository.save(produto);</code></pre>
+
+</main>
+
+</body>
+</html>

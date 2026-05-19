@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>02 - Estrutura Spring Boot</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+        header { background: #1f2937; color: white; padding: 25px; text-align: center; }
+        main { max-width: 950px; margin: 30px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+        h1, h2, h3 { color: #1f2937; }
+        pre { background: #111827; color: #e5e7eb; padding: 12px; border-radius: 8px; overflow-x: auto; }
+        .box { background: #f9fafb; border-left: 6px solid #4b5563; padding: 15px; margin: 20px 0; border-radius: 6px; }
+        a { color: #2563eb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>02 - Estrutura Spring Boot</h1>
+</header>
+
+<main>
+    <p><a href="index.html">Voltar ao início</a></p>
+
+    <h2>Camadas principais</h2>
+
+    <p>
+        Em uma API Spring Boot, é comum organizar o projeto em camadas.
+        Cada camada tem uma responsabilidade.
+    </p>
+
+    <div class="box">
+        <strong>Controller:</strong> recebe as requisições HTTP.<br>
+        <strong>Service:</strong> concentra regras de negócio e lógica da aplicação.<br>
+        <strong>Repository:</strong> faz a comunicação com o banco de dados.<br>
+        <strong>Model:</strong> representa as entidades do sistema.<br>
+        <strong>DTO:</strong> define os dados de entrada e saída da API.
+    </div>
+
+    <div>
+        <strong>Atenção:</strong> Os exemplos a seguir são apenas para exemplificar e demonstrar de forma simples classes, métodos e estruturas de um projeto. Eles não estão completos e caso sejam usados, necessitam adaptações.
+    </div>
+
+    <h2>Model</h2>
+    <p>
+        A model representa uma entidade do sistema.
+    </p>
+
+    <pre><code>@Entity
+public class Produto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idLocal;
+
+    private String nome;
+    private Double preco;
+
+    // getters e setters
+}</code></pre>
+
+    <h2>Repository</h2>
+    <p>
+        O repository acessa o banco de dados usando o Spring Data JPA.
+    </p>
+
+    <pre><code>public interface ProdutoRepository extends JpaRepository&lt;Produto, Long&gt; {
+}</code></pre>
+
+    <h2>Service</h2>
+    <p>
+        O service organiza a lógica do sistema.
+    </p>
+
+    <pre><code>@Service
+public class ProdutoService {
+
+    @Autowired
+    private ProdutoRepository repository;
+
+    public List&lt;Produto&gt; listarTodos() {
+        return repository.findAll();
+    }
+
+    public Produto buscarPorId(Long idLocal) {
+        return repository.findById(idLocal)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    }
+
+    public Produto salvar(Produto produto) {
+        return repository.save(produto);
+    }
+
+    public void deletar(Long idLocal) {
+        repository.deleteById(idLocal);
+    }
+}</code></pre>
+
+    <h2>Controller</h2>
+    <p>
+        O controller expõe as rotas da API.
+    </p>
+
+    <pre><code>@RestController
+@RequestMapping("/produtos")
+public class ProdutoController {
+
+    @Autowired
+    private ProdutoService service;
+
+    @GetMapping
+    public List&lt;Produto&gt; listar() {
+        return service.listarTodos();
+    }
+
+    @PostMapping
+    public Produto cadastrar(@RequestBody Produto produto) {
+        return service.salvar(produto);
+    }
+}</code></pre>
+
+    <h2>DTO</h2>
+    <p>
+        DTO significa Data Transfer Object. Ele evita expor diretamente a entidade e permite controlar
+        quais dados entram e saem da API.
+    </p>
+
+    <pre><code>public record ProdutoRequestDTO(
+             String nome,
+             Double preco
+){}</code></pre>
+
+    <pre><code>public record ProdutoResponseDTO(
+     Long idLocal,
+     String nome,
+     Double preco
+){}</code></pre>
+
+</main>
+
+</body>
+</html>
