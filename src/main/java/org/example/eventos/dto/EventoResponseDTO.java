@@ -1,10 +1,10 @@
 package org.example.eventos.dto;
 
+import org.example.eventos.model.LocalEvento;
+
 import java.time.LocalDate;
 
 public record EventoResponseDTO(
-
-        Long id,
 
         String nome,
 
@@ -14,8 +14,7 @@ public record EventoResponseDTO(
 
         Double valorIngresso,
 
-        Long localId,
-
+        LocalEvento localEvento
         //TODO: retornar informações do local
 ) {
 }

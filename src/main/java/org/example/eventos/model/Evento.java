@@ -1,8 +1,14 @@
 package org.example.eventos.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 public class Evento {
 
@@ -19,8 +25,12 @@ public class Evento {
 
     private Double valorIngresso;
 
-    //TO DO: corrigir o relacionamento entre Evento e LocalEvento
-    private Long localId;
+    @ManyToOne
+    @JoinColumn(name = "idLocal")
+    private LocalEvento localEvento;
+
+    @OneToMany(mappedBy = "Inscricao")
+    private List<Inscricao> inscricaos;
 
 }
 

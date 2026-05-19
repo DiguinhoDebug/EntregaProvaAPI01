@@ -12,8 +12,8 @@ public class SwaggerConfig {
     public OpenAPI apiInfo() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API de ... [COMPLETE AQUI]")
-                        .description("API desenvolvida para... [COMPLETE AQUI]")
+                        .title("API de gerenciamento de eventos")
+                        .description("API desenvolvida para gerenciar eventos da empresa XXX ")
                         .version("1.0.0"));
     }
 }

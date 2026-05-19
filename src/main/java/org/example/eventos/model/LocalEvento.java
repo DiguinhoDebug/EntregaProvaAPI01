@@ -1,7 +1,13 @@
 package org.example.eventos.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 public class LocalEvento {
 
@@ -15,37 +21,7 @@ public class LocalEvento {
 
     private Integer capacidade;
 
-    public LocalEvento(){}
+    @OneToMany(mappedBy = "Evento")
+    private List<Evento> eventos;
 
-    public Long getIdLocal() {
-        return idLocal;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public Integer getCapacidade() {
-        return capacidade;
-    }
-
-    public void setIdLocal(Long idLocal) {
-        this.idLocal = idLocal;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public void setCapacidade(Integer capacidade) {
-        this.capacidade = capacidade;
-    }
 }

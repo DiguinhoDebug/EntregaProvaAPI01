@@ -36,7 +36,8 @@ public class InscricaoService {
     }
 
     public InscricaoResponseDTO cadastrar(InscricaoRequestDTO dto) {
-        Evento evento = eventoRepository.findById(dto.eventoId())
+        Evento evento = eventoRepository.findById(dto.idEvento())
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
                 //TODO: adicionar a exception
 
         Inscricao inscricao = new Inscricao();
@@ -53,9 +54,11 @@ public class InscricaoService {
 
     public InscricaoResponseDTO atualizar(Long id, InscricaoRequestDTO dto) {
         Inscricao inscricao = inscricaoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Inscrição não encontrada"));
                 //TODO: adicionar a exception
 
         Evento evento = eventoRepository.findById(dto.eventoId())
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
                 //TODO: adicionar a exception
 
         inscricao.setNomeParticipante(dto.nomeParticipante());
@@ -70,22 +73,25 @@ public class InscricaoService {
 
     public void deletar(Long id) {
         Inscricao inscricao = inscricaoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Inscrição não encontrada"));
                     //TODO: adicionar a exception
 
+        inscricaoRepository.deleteById(id);
         //TODO: chamar método de deletar do repository
     }
 
     public List<InscricaoResponseDTO> listarPorEvento(Long idEvento) {
-        return inscricaoRepository.findByEventoId(idEvento)
+        return inscricaoRepository.findById(idEvento)
                 .stream()
                 .map(this::converterParaResponse)
                 .toList();
     }
 
     private InscricaoResponseDTO converterParaResponse(Inscricao inscricao) {
+        Evento evento = eventoRepository.findById(idEvento())
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
         return new InscricaoResponseDTO(
                 //TODO: fazer os gets de "inscricao" conforme o que deve aparecer no response
-
         );
     }
 }
