@@ -2,6 +2,10 @@ package org.example.eventos.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.example.eventos.dto.EventoRequestDTO;
+import org.example.eventos.dto.EventoResponseDTO;
+import org.example.eventos.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +33,7 @@ public class EventoController {
 
     @Operation(summary = "Cadastra um novo evento")
     @PostMapping
-    public EventoResponseDTO cadastrar(@RequestBody EventoRequestDTO dto) {
+    public EventoResponseDTO cadastrar(@RequestBody @Valid EventoRequestDTO dto) {
         //TODO: usar a validação de dados
         return service.cadastrar(dto);
     }
@@ -49,8 +53,8 @@ public class EventoController {
     @Operation(summary = "Filtra eventos pelo nome")
     @GetMapping("/buscar")
     public List<EventoResponseDTO> filtrarPorNome(@RequestParam String nome) {
-        //TODO: ajustar o mapeamento
-        return service.filtrarPorNome(nome);
+        //TODO: ajustar o mapeamento (sei nao eim)
+        return service.listarPorNome(nome);
     }
 
     @Operation(summary = "Lista eventos de um determinado local")
