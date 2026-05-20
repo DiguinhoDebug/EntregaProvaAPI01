@@ -22,6 +22,6 @@ public class Inscricao {
 
     @ManyToOne
     @JoinColumn(name = "idEvento")
-    private Long idEvento;
+    private Evento evento;
 
 }

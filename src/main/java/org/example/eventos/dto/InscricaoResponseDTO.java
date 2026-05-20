@@ -10,6 +10,6 @@ public record InscricaoResponseDTO(
 
         String status,
 
-        Long idEvento
+        Evento evento
 ) {
 }

@@ -3,6 +3,7 @@ package org.example.eventos.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.example.eventos.model.Evento;
 
 public record LocalEventoRequestDTO(
 
@@ -18,6 +19,6 @@ public record LocalEventoRequestDTO(
 
         @Positive(message = "Insira um valor positivo")
         @NotNull(message = "Preencha a qual evento o local irá armazenar")
-        Long idEvento
+        Evento evento
 ) {
 }

@@ -36,7 +36,7 @@ public class InscricaoService {
     }
 
     public InscricaoResponseDTO cadastrar(InscricaoRequestDTO dto) {
-        Evento evento = eventoRepository.findById(dto.idEvento())
+        Evento evento = eventoRepository.findById(dto.evento().getIdEvento())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
 
         Inscricao inscricao = new Inscricao();
@@ -44,7 +44,7 @@ public class InscricaoService {
         inscricao.setNomeParticipante(dto.nomeParticipante());
         inscricao.setEmailParticipante(dto.emailParticipante());
         inscricao.setStatus(dto.status());
-        inscricao.setIdEvento(dto.idEvento());
+        inscricao.setEvento(dto.evento());
 
         Inscricao salva = inscricaoRepository.save(inscricao);
 
@@ -55,13 +55,13 @@ public class InscricaoService {
         Inscricao inscricao = inscricaoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Inscrição não encontrada"));
 
-        Evento evento = eventoRepository.findById(dto.idEvento())
+        Evento evento = eventoRepository.findById(dto.evento().getIdEvento())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
 
         inscricao.setNomeParticipante(dto.nomeParticipante());
         inscricao.setEmailParticipante(dto.emailParticipante());
         inscricao.setStatus(dto.status());
-        inscricao.setIdEvento(dto.idEvento());
+        inscricao.setEvento(dto.evento());
 
         Inscricao atualizada = inscricaoRepository.save(inscricao);
 
@@ -71,7 +71,6 @@ public class InscricaoService {
     public void deletar(Long id) {
         Inscricao inscricao = inscricaoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Inscrição não encontrada"));
-                    //TODO: adicionar a exception
 
         inscricaoRepository.deleteById(id);
     }
@@ -88,7 +87,7 @@ public class InscricaoService {
                 inscricao.getNomeParticipante(),
                 inscricao.getEmailParticipante(),
                 inscricao.getStatus(),
-                inscricao.getIdEvento()
+                inscricao.getEvento()
         );
     }
 }

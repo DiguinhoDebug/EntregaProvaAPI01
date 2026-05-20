@@ -27,7 +27,7 @@ public class Evento {
 
     @ManyToOne
     @JoinColumn(name = "idLocal")
-    private Long idLocalEvento;
+    private LocalEvento localEvento;
 
     @OneToMany(mappedBy = "Inscricao")
     private List<Inscricao> inscricaos;

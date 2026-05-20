@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.example.eventos.model.LocalEvento;
 
 import java.time.LocalDate;
 
@@ -24,6 +25,6 @@ public record EventoRequestDTO(
 
         @NotNull(message = "Informe o local do evento")
         @Positive(message = "Insira um id válido")
-        Long localId
+        LocalEvento localEvento
 ) {
 }

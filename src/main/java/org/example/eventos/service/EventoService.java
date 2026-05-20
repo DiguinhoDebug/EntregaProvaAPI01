@@ -35,7 +35,7 @@ public class EventoService {
     }
 
     public EventoResponseDTO cadastrar(EventoRequestDTO dto) {
-        LocalEvento localEvento = localEventoRepository.findById(dto.localId())
+        LocalEvento localEvento = localEventoRepository.findById(dto.localEvento().getIdLocal())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Local do evento não encontrado"));
 
         Evento evento = new Evento();
@@ -44,7 +44,7 @@ public class EventoService {
         evento.setDescricao(dto.descricao());
         evento.setDataEvento(dto.dataEvento());
         evento.setValorIngresso(dto.valorIngresso());
-        evento.setIdLocalEvento(dto.localId());
+        evento.setLocalEvento(dto.localEvento());
 
         Evento salvo = eventoRepository.save(evento);
 
@@ -55,13 +55,13 @@ public class EventoService {
         Evento evento = eventoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
 
-        LocalEvento localEvento = localEventoRepository.findById(dto.localId())
+        LocalEvento localEvento = localEventoRepository.findById(dto.localEvento().getIdLocal())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Local do evento não encontrado"));
         evento.setNome(dto.nome());
         evento.setDescricao(dto.descricao());
         evento.setDataEvento(dto.dataEvento());
         evento.setValorIngresso(dto.valorIngresso());
-        evento.setIdLocalEvento(dto.localId());
+        evento.setLocalEvento(dto.localEvento());
 
         Evento atualizado = eventoRepository.save(evento);
 
@@ -95,7 +95,7 @@ public class EventoService {
                 evento.getDescricao(),
                 evento.getDataEvento(),
                 evento.getValorIngresso(),
-                evento.getIdLocalEvento()
+                evento.getLocalEvento()
         );
     }
 }
