@@ -37,7 +37,6 @@ public class EventoService {
     public EventoResponseDTO cadastrar(EventoRequestDTO dto) {
         LocalEvento localEvento = localEventoRepository.findById(dto.localId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Local do evento não encontrado"));
-        //TODO: adicionar a exception
 
         Evento evento = new Evento();
 
@@ -55,12 +54,9 @@ public class EventoService {
     public EventoResponseDTO atualizar(Long id, EventoRequestDTO dto) {
         Evento evento = eventoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
-        //TODO: adicionar a exception
 
         LocalEvento localEvento = localEventoRepository.findById(dto.localId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Local do evento não encontrado"));
-        //TODO: adicionar a exception
-
         evento.setNome(dto.nome());
         evento.setDescricao(dto.descricao());
         evento.setDataEvento(dto.dataEvento());
@@ -75,10 +71,8 @@ public class EventoService {
     public void deletar(Long id) {
         Evento evento = eventoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
-        //TODO: adicionar a exception
 
         eventoRepository.deleteById(id);
-        //TODO: chamar método de deletar do repository
     }
 
     public List<EventoResponseDTO> listarPorLocal(Long idLocal) {
@@ -102,7 +96,6 @@ public class EventoService {
                 evento.getDataEvento(),
                 evento.getValorIngresso(),
                 evento.getIdLocalEvento()
-                //TODO: fazer os gets de "inscricao" conforme o que deve aparecer no response
         );
     }
 }

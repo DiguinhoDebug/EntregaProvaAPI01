@@ -1,11 +1,8 @@
 package org.example.eventos.service;
 
-import org.example.eventos.dto.EventoRequestDTO;
-import org.example.eventos.dto.EventoResponseDTO;
 import org.example.eventos.dto.LocalEventoRequestDTO;
 import org.example.eventos.dto.LocalEventoResponseDTO;
 import org.example.eventos.exception.RecursoNaoEncontradoException;
-import org.example.eventos.model.Evento;
 import org.example.eventos.model.LocalEvento;
 import org.example.eventos.repository.EventoRepository;
 import org.example.eventos.repository.LocalEventoRepository;

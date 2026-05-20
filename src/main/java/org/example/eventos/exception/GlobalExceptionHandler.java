@@ -13,8 +13,6 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //TODO: implementar a expception do "RecursoNaoEncontrado" e mudar nos services
-
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> tratarRuntime(RuntimeException ex) {
         return ResponseEntity

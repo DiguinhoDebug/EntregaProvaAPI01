@@ -13,8 +13,4 @@ public interface EventoRepository extends JpaRepository <Evento, Long> {
     List<Evento> findByNomeContainingIgnoreCase(String nome);
 
     List<Evento> findByLocal(Long idLocal);
-    // TODO: criar método para filtrar eventos pelo nome.
-
-    //TODO: criar método para listar eventos de um determinado local.
-
 }

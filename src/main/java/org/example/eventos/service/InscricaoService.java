@@ -38,7 +38,6 @@ public class InscricaoService {
     public InscricaoResponseDTO cadastrar(InscricaoRequestDTO dto) {
         Evento evento = eventoRepository.findById(dto.idEvento())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
-                //TODO: adicionar a exception
 
         Inscricao inscricao = new Inscricao();
 
@@ -55,11 +54,9 @@ public class InscricaoService {
     public InscricaoResponseDTO atualizar(Long id, InscricaoRequestDTO dto) {
         Inscricao inscricao = inscricaoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Inscrição não encontrada"));
-                //TODO: adicionar a exception
 
         Evento evento = eventoRepository.findById(dto.idEvento())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
-                //TODO: adicionar a exception
 
         inscricao.setNomeParticipante(dto.nomeParticipante());
         inscricao.setEmailParticipante(dto.emailParticipante());
@@ -77,7 +74,6 @@ public class InscricaoService {
                     //TODO: adicionar a exception
 
         inscricaoRepository.deleteById(id);
-        //TODO: chamar método de deletar do repository
     }
 
     public List<InscricaoResponseDTO> listarPorEvento(Long idEvento) {
@@ -93,7 +89,6 @@ public class InscricaoService {
                 inscricao.getEmailParticipante(),
                 inscricao.getStatus(),
                 inscricao.getIdEvento()
-                //TODO: fazer os gets de "inscricao" conforme o que deve aparecer no response
         );
     }
 }
