@@ -45,7 +45,7 @@ public class InscricaoService {
         inscricao.setNomeParticipante(dto.nomeParticipante());
         inscricao.setEmailParticipante(dto.emailParticipante());
         inscricao.setStatus(dto.status());
-        inscricao.setEvento(evento);
+        inscricao.setIdEvento(dto.idEvento());
 
         Inscricao salva = inscricaoRepository.save(inscricao);
 
@@ -57,14 +57,14 @@ public class InscricaoService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Inscrição não encontrada"));
                 //TODO: adicionar a exception
 
-        Evento evento = eventoRepository.findById(dto.eventoId())
+        Evento evento = eventoRepository.findById(dto.idEvento())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
                 //TODO: adicionar a exception
 
         inscricao.setNomeParticipante(dto.nomeParticipante());
         inscricao.setEmailParticipante(dto.emailParticipante());
         inscricao.setStatus(dto.status());
-        inscricao.setEvento(evento);
+        inscricao.setIdEvento(dto.idEvento());
 
         Inscricao atualizada = inscricaoRepository.save(inscricao);
 
@@ -81,16 +81,18 @@ public class InscricaoService {
     }
 
     public List<InscricaoResponseDTO> listarPorEvento(Long idEvento) {
-        return inscricaoRepository.findById(idEvento)
+        return inscricaoRepository.findInscricaoByEvento(idEvento)
                 .stream()
                 .map(this::converterParaResponse)
                 .toList();
     }
 
     private InscricaoResponseDTO converterParaResponse(Inscricao inscricao) {
-        Evento evento = eventoRepository.findById(idEvento())
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Evento não encontrado"));
         return new InscricaoResponseDTO(
+                inscricao.getNomeParticipante(),
+                inscricao.getEmailParticipante(),
+                inscricao.getStatus(),
+                inscricao.getIdEvento()
                 //TODO: fazer os gets de "inscricao" conforme o que deve aparecer no response
         );
     }

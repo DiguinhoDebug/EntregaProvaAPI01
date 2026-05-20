@@ -1,7 +1,16 @@
 package org.example.eventos.dto;
 
-public class LocalEventoResponseDTO (
 
-        //TODO: colocar dados trazidos no response
+import org.example.eventos.model.Evento;
+
+public record LocalEventoResponseDTO(
+
+        String nome,
+
+        String endereco,
+
+        Integer capacidade,
+
+        Long idEvento
 ){
 }

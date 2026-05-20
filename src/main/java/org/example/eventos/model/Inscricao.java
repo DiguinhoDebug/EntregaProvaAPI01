@@ -23,6 +23,6 @@ public class Inscricao {
     //TODO: transformar em entidade e colocar relacionamento
     @ManyToOne
     @JoinColumn(name = "idEvento")
-    private Evento evento;
+    private Long idEvento;
 
 }

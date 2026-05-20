@@ -14,6 +14,10 @@ public record LocalEventoRequestDTO(
 
         @NotNull(message = "A capacidade é obrigatória")
         @Positive(message = "A capacidade deve ser maior que zero")
-        Integer capacidade
+        Integer capacidade,
+
+        @Positive(message = "Insira um valor positivo")
+        @NotNull(message = "Preencha a qual evento o local irá armazenar")
+        Long idEvento
 ) {
 }

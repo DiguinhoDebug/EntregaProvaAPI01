@@ -14,7 +14,7 @@ public record EventoResponseDTO(
 
         Double valorIngresso,
 
-        LocalEvento localEvento
+        Long idLocalEvento
         //TODO: retornar informações do local
 ) {
 }
