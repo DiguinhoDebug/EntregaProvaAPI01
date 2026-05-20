@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.example.eventos.dto.InscricaoRequestDTO;
 import org.example.eventos.dto.InscricaoResponseDTO;
+import org.example.eventos.dto.LocalEventoRequestDTO;
 import org.example.eventos.dto.LocalEventoResponseDTO;
 import org.example.eventos.service.InscricaoService;
 import org.example.eventos.service.LocalEventoService;
@@ -24,33 +25,31 @@ public class LocalEventoController {
     @GetMapping
     public List<LocalEventoResponseDTO> listar() { return service.listarTodos(); }
 
-    @Operation(summary = "Busca uma inscrição por id")
-    @GetMapping("/{idEvento}")
-    public InscricaoResponseDTO buscarPorId(@PathVariable Long idInscricao) {
-        return service.buscarPorId(idInscricao);
-    }
+    @Operation(summary = "Busca um local por id")
+    @GetMapping("/{idLocal}")
+    public LocalEventoResponseDTO buscarPorId(@PathVariable Long idLocal) { return service.buscarPorId(idLocal); }
 
-    @Operation(summary = "Cadastra uma nova inscrição")
+    @Operation(summary = "Cadastra um novo local")
     @PostMapping
-    public InscricaoResponseDTO cadastrar(@RequestBody @Valid InscricaoRequestDTO dto) {
+    public LocalEventoResponseDTO cadastrar(@RequestBody @Valid LocalEventoRequestDTO dto) {
         return service.cadastrar(dto);
     }
 
-    @Operation(summary = "Atualiza uma inscrição existente")
-    @PutMapping("/{idInscricao}")
-    public InscricaoResponseDTO atualizar(@PathVariable Long idInscricao, @RequestBody InscricaoRequestDTO dto) {
-        return service.atualizar(idInscricao, dto);
+    @Operation(summary = "Atualiza um local existente")
+    @PutMapping("/{idLocal}")
+    public LocalEventoResponseDTO atualizar(@PathVariable Long idLocal, @RequestBody LocalEventoRequestDTO dto) {
+        return service.atualizar(idLocal, dto);
     }
 
-    @Operation(summary = "Remove uma inscrição")
-    @DeleteMapping("/{idInscricao}")
-    public void deletar(@PathVariable Long idInscricao) {
-        service.deletar(idInscricao);
+    @Operation(summary = "Remove um local")
+    @DeleteMapping("/{idLocal}")
+    public void deletar(@PathVariable Long idLocal) {
+        service.deletar(idLocal);
     }
 
-    @Operation(summary = "Filtra inscrições pelo evento")
+    @Operation(summary = "Filtra local por nome")
     @GetMapping("/buscar")
-    public List<InscricaoResponseDTO> filtrarPorEvento(@RequestParam Long idEvento) {
-        return service.listarPorEvento(idEvento);
+    public List<LocalEventoResponseDTO> filtrarPorNome(@RequestParam String nome) {
+        return service.listarPorNome(nome);
     }
 }
