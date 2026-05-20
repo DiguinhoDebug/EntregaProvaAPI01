@@ -1,8 +1,6 @@
 package org.example.eventos.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class Inscricao {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInscricao;
 
     private String nomeParticipante;

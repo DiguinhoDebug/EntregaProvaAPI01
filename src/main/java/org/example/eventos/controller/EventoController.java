@@ -53,14 +53,12 @@ public class EventoController {
     @Operation(summary = "Filtra eventos pelo nome")
     @GetMapping("/buscar")
     public List<EventoResponseDTO> filtrarPorNome(@RequestParam String nome) {
-        //TODO: ajustar o mapeamento (sei nao eim)
         return service.listarPorNome(nome);
     }
 
     @Operation(summary = "Lista eventos de um determinado local")
     @GetMapping("/local")
     public List<EventoResponseDTO> listarPorLocal(@PathVariable Long idLocal) {
-        //TODO: revisar para garantir que recebe o id para buscar
         return service.listarPorLocal(idLocal);
     }
 }

@@ -43,7 +43,8 @@ public class LocalEventoService {
         localEvento.setEndereco(dto.endereco());
         localEvento.setCapacidade(dto.capacidade());
 
-        LocalEvento salvo = localEventoRepository.save(salvo);
+        LocalEvento salvo = localEventoRepository.save(localEvento);
+
 
         return converterParaResponse(salvo);
     }
@@ -56,7 +57,7 @@ public class LocalEventoService {
         localEvento.setEndereco(dto.endereco());
         localEvento.setCapacidade(dto.capacidade());
 
-        LocalEvento atualizado = localEventoRepository.save(atualizado);
+        LocalEvento atualizado = localEventoRepository.save(localEvento);
 
         return converterParaResponse(atualizado);
     }

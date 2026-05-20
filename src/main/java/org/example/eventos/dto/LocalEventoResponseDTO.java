@@ -3,6 +3,8 @@ package org.example.eventos.dto;
 
 import org.example.eventos.model.Evento;
 
+import java.util.List;
+
 public record LocalEventoResponseDTO(
 
         String nome,
@@ -11,6 +13,6 @@ public record LocalEventoResponseDTO(
 
         Integer capacidade,
 
-        Long idEvento
+        List<Evento> evento
 ){
 }
